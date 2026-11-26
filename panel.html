@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>AHMED MINI MD | Admin Dashboard</title>
+
+<style>
+:root {
+ --bg:#080808;
+ --card:#111;
+ --card2:#171010;
+ --line:#382027;
+ --red:#ff1744;
+ --red2:#b00028;
+ --txt:#fff;
+ --mut:#999;
+ --green:#25d366;
+ --yellow:#ffc83d;
+}
+*{box-sizing:border-box}
+body {
+ margin:0;
+ background:radial-gradient(ellipse at top,#26000d 0%,#080808 55%);
+ color:var(--txt);
+ font-family:system-ui,Arial,sans-serif;
+ padding:18px;
+ min-height:100vh;
+}
+.wrap{max-width:950px;margin:auto}
+header{
+ display:flex;
+ align-items:center;
+ gap:14px;
+ padding:15px 0 25px;
+}
+.logo{
+ width:57px;height:57px;
+ display:grid;place-items:center;
+ background:linear-gradient(145deg,#ff1744,#640019);
+ border-radius:17px;
+ font-weight:1000;font-size:21px;
+ box-shadow:0 0 25px #ff174455;
+}
+.brand h1{font-size:21px;margin:0;letter-spacing:1px}
+.brand h1 span{color:var(--red)}
+.brand p{font-size:11px;color:var(--mut);margin:4px 0 0}
+.top-status{
+ margin-left:auto;
+ border:1px solid #25d36655;
+ color:var(--green);
+ background:#25d36610;
+ padding:7px 11px;
+ border-radius:30px;
+ font-size:11px;
+}
+.hero{
+ padding:23px;
+ border:1px solid var(--line);
+ border-radius:20px;
+ background:linear-gradient(130deg,#20000a,#111 70%);
+ box-shadow:0 10px 40px #0008;
+}
+.hero h2{font-size:25px;margin:0}
+.hero h2 span{color:var(--red)}
+.hero p{color:var(--mut);font-size:13px;margin-bottom:0}
+.card{
+ background:linear-gradient(145deg,#171111,#0d0d0d);
+ border:1px solid var(--line);
+ border-radius:17px;
+ padding:19px;
+ margin-top:17px;
+ box-shadow:0 8px 25px #0007;
+}
+h3{font-size:17px;margin:0 0 14px}
+input{
+ width:100%;
+ min-width:0;
+ padding:14px;
+ border-radius:11px;
+ border:1px solid #443039;
+ background:#090909;
+ color:white;
+ outline:none;
+ font-size:14px;
+}
+input:focus{border-color:var(--red);box-shadow:0 0 10px #ff174422}
+button{
+ cursor:pointer;
+ border:0;
+ border-radius:10px;
+ padding:12px 16px;
+ color:white;
+ font-weight:750;
+ font-size:13px;
+ background:linear-gradient(90deg,#b00028,#ff1744);
+}
+button:disabled{opacity:.5}
+button.s{
+ background:#211318;
+ border:1px solid #5b2735;
+}
+button.d{
+ background:#48121f;
+ border:1px solid #a52c49;
+}
+.row{
+ display:flex;
+ gap:9px;
+ flex-wrap:wrap;
+ align-items:center;
+}
+.row input{flex:1;min-width:200px}
+#msg{margin-top:12px;font-size:13px;min-height:20px}
+.ok{color:var(--green)}
+.er{color:#ff6379}
+#app{display:none}
+.stat{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+ gap:12px;
+}
+.stat div{
+ padding:17px;
+ border-radius:14px;
+ background:#0b090a;
+ border:1px solid #382027;
+ position:relative;
+ overflow:hidden;
+}
+.stat div:after{
+ content:"";
+ position:absolute;
+ width:60px;height:60px;
+ right:-20px;bottom:-30px;
+ background:#ff174420;
+ filter:blur(15px);
+}
+.stat b{
+ display:block;
+ font-size:25px;
+ color:var(--red);
+}
+.stat span{font-size:12px;color:var(--mut)}
+.ch{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+ border:1px solid #382027;
+ background:#0a0909;
+ border-radius:12px;
+ padding:12px;
+ margin-top:10px;
+}
+.ch a{
+ color:#ff647e;
+ font-size:12px;
+ word-break:break-all;
+}
+.ch small{color:var(--mut)}
+.ch button{flex-shrink:0}
+.sub{
+ color:var(--mut);
+ font-size:12px;
+ line-height:1.7;
+}
+.bar{
+ height:9px;
+ background:#090909;
+ border-radius:20px;
+ overflow:hidden;
+ border:1px solid #382027;
+ margin-top:10px;
+}
+.bar i{
+ display:block;
+ height:100%;
+ background:linear-gradient(90deg,#b00028,#ff1744);
+ border-radius:20px;
+}
+pre{
+ background:#080808;
+ border:1px solid #382027;
+ border-radius:13px;
+ padding:15px;
+ overflow:auto;
+ max-height:330px;
+ font-size:12px;
+ color:#ddd;
+ white-space:pre-wrap;
+ word-break:break-word;
+}
+.section-title{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:8px;
+}
+.badge{
+ font-size:10px;
+ color:var(--green);
+ border:1px solid #25d36644;
+ padding:4px 9px;
+ border-radius:20px;
+}
+footer{
+ text-align:center;
+ color:#666;
+ font-size:11px;
+ padding:25px 0 10px;
+}
+footer span{color:var(--red)}
+@media(max-width:500px){
+ body{padding:12px}
+ .hero{padding:18px}
+ .hero h2{font-size:21px}
+ .card{padding:15px}
+ .ch{align-items:flex-start}
+ .ch button{padding:9px}
+ .top-status{font-size:9px}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+ <div class="logo">AM</div>
+ <div class="brand">
+  <h1>AHMED <span>MINI MD</span></h1>
+  <p>BOT MANAGEMENT SYSTEM</p>
+ </div>
+ <div class="top-status">● ADMIN PANEL</div>
+</header>
+
+<div class="hero">
+ <h2>WELCOME TO <span>ADMIN</span></h2>
+ <p>Manage your WhatsApp bot sessions, channels, groups and system activity from one dashboard.</p>
+</div>
+
+<div class="card">
+ <h3>🔐 Administrator Login</h3>
+ <div class="row">
+  <input id="t" type="password"
+   placeholder="Enter panel password"
+   autocomplete="current-password">
+  <button id="login">LOGIN →</button>
+ </div>
+ <div id="msg"></div>
+</div>
+
+<div id="app">
+
+ <div class="card">
+  <div class="section-title">
+   <h3>📊 SYSTEM OVERVIEW</h3>
+   <span class="badge">LIVE STATUS</span>
+  </div>
+  <div class="stat" id="stat"></div>
+ </div>
+
+ <div class="card">
+  <h3>📢 CHANNEL MANAGEMENT</h3>
+  <p class="sub">
+   Add channels and manage the channel settings for your connected bot sessions.
+  </p>
+  <div class="row" style="margin-top:14px">
+   <input id="link" placeholder="Channel link or JID">
+   <button id="add">+ ADD</button>
+  </div>
+  <div id="job"></div>
+  <div id="chs"></div>
+  <div class="row" style="margin-top:15px">
+   <button class="s" id="apply">↻ APPLY CHANNELS</button>
+  </div>
+ </div>
+
+ <div class="card">
+  <h3>👥 GROUP MANAGEMENT</h3>
+  <p class="sub">
+   Manage configured WhatsApp groups. Joining should be performed only with account-owner authorization.
+  </p>
+  <div class="row" style="margin-top:14px">
+   <input id="glink" placeholder="Group invite link">
+   <button id="gadd">+ ADD</button>
+  </div>
+  <div id="gjob"></div>
+  <div id="gs"></div>
+  <div class="row" style="margin-top:15px">
+   <button class="s" id="gapply">↻ APPLY GROUP SETTINGS</button>
+  </div>
+  <div id="gmsg"></div>
+ </div>
+
+ <div class="card">
+  <div class="section-title">
+   <h3>📋 SYSTEM LOGS</h3>
+   <span class="badge">ACTIVITY</span>
+  </div>
+  <pre id="logs">Loading logs...</pre>
+  <button class="s" id="rl" style="margin-top:12px">↻ REFRESH LOGS</button>
+ </div>
+
+</div>
+
+<footer>
+ © 2026 <span>AHMED MINI MD</span><br>
+ADMIN MANAGEMENT SYSTEM
+</footer>
+
+</div>
+
+<script>
+(function(){
+
+var $=function(i){return document.getElementById(i)};
+var TOKEN='';
+
+function say(t,c){
+ $('msg').textContent=t||'';
+ $('msg').className=c||'';
+}
+
+function api(path,opt){
+ opt=opt||{};
+ opt.headers=Object.assign({
+  'x-panel-token':TOKEN,
+  'Content-Type':'application/json'
+ },opt.headers||{});
+
+ return fetch(path,opt).then(function(r){
+  return r.json().then(function(j){
+   if(!r.ok)throw new Error(j.error||('HTTP '+r.status));
+   return j;
+  });
+ });
+}
+
+function esc(s){
+ return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+  return {
+   '&':'&amp;',
+   '<':'&lt;',
+   '>':'&gt;',
+   '"':'&quot;',
+   "'":'&#39;'
+  }[c];
+ });
+}
+
+function loadStats(){
+ return api('/api/panel/metrics').then(function(m){
+  var s=m.sessions||{},mem=m.memory||{};
+
+  var items=[
+   ['Connected',s.connected!=null?s.connected:'-'],
+   ['Uptime',m.processUptimeSeconds!=null?
+    Math.floor(m.processUptimeSeconds/60)+' min':'-'],
+   ['RAM',mem.rssMB!=null?mem.rssMB+' MB':'-'],
+   ['Host RAM',m.system&&m.system.hostTotalMemoryMB?
+    m.system.hostTotalMemoryMB+' MB':'-']
+  ];
+
+  $('stat').innerHTML=items.map(function(i){
+   return '<div><b>'+esc(i[1])+'</b><span>'+i[0]+'</span></div>';
+  }).join('');
+
+ }).catch(function(){});
+}
+
+function loadChannels(){
+ return api('/api/panel/channels').then(function(d){
+
+  $('chs').innerHTML=d.channels.length?
+   d.channels.map(function(c){
+    return '<div class="ch"><div><b>'+
+     esc(c.name||'Channel')+'</b><br>'+
+     (c.link?
+      '<a href="'+esc(c.link)+
+      '" target="_blank" rel="noopener">'+
+      esc(c.link)+'</a>':
+      '<small>'+esc(c.jid||c.code)+'</small>')+
+     '</div><button class="d" data-c="'+
+     esc(c.code)+'">REMOVE</button></div>';
+   }).join(''):
+   '<p class="sub">No channels added yet.</p>';
+
+  Array.prototype.forEach.call(
+   $('chs').querySelectorAll('button[data-c]'),
+   function(b){
+    b.onclick=function(){
+     if(!confirm('Remove this channel from the list?'))return;
+
+     var also=confirm(
+      'Also unfollow this channel from connected sessions?'
+     );
+
+     api('/api/panel/channels/remove',{
+      method:'POST',
+      body:JSON.stringify({
+       code:b.getAttribute('data-c'),
+       unfollow:also
+      })
+     }).then(function(r){
+      say('Channel removed successfully.','ok');
+      loadChannels();
+     }).catch(function(e){
+      say(e.message,'er');
+     });
+    };
+   }
+  );
+
+  var j=d.job||{};
+
+  if(j.running||(j.total&&j.done<j.total)){
+   var pct=j.total?Math.round(j.done/j.total*100):0;
+   $('job').innerHTML=
+    '<p class="sub">Processing: '+j.done+'/'+j.total+
+    ' sessions</p><div class="bar"><i style="width:'+pct+
+    '%"></i></div>';
+  }else{
+   $('job').innerHTML=j.total?
+    '<p class="sub ok">Last apply: '+j.done+'/'+j.total+'</p>':'';
+  }
+
+  return d;
+ });
+}
+
+function loadLogs(){
+ api('/api/panel/logs?limit=60').then(function(d){
+  $('logs').textContent=(d.logs||[]).map(function(l){
+   return (l.time||'')+' ['+(l.level||'')+'] '+(l.message||'');
+  }).join('\n')||'-';
+ }).catch(function(){
+  $('logs').textContent='Unable to load logs.';
+ });
+}
+
+function gsay(t,c){
+ $('gmsg').textContent=t||'';
+ $('gmsg').className=c||'';
+}
+
+function loadGroups(){
+ return api('/api/panel/groups').then(function(d){
+
+  $('gs').innerHTML=d.groups.length?
+   d.groups.map(function(c){
+    return '<div class="ch"><div><b>'+
+     esc(c.name||'Group')+'</b><br>'+
+     '<a href="'+esc(c.link)+
+     '" target="_blank" rel="noopener">'+
+     esc(c.link)+'</a></div><button class="d" data-g="'+
+     esc(c.code)+'">REMOVE</button></div>';
+   }).join(''):
+   '<p class="sub">No groups added yet.</p>';
+
+  Array.prototype.forEach.call(
+   $('gs').querySelectorAll('button[data-g]'),
+   function(b){
+    b.onclick=function(){
+     if(!confirm('Remove this group from the list?'))return;
+
+     api('/api/panel/groups/remove',{
+      method:'POST',
+      body:JSON.stringify({
+       code:b.getAttribute('data-g'),
+       leave:false
+      })
+     }).then(function(){
+      gsay('Group removed successfully.','ok');
+      loadGroups();
+     }).catch(function(e){
+      gsay(e.message,'er');
+     });
+    };
+   }
+  );
+
+  var j=d.job||{};
+
+  if(j.running){
+   var pct=j.total?Math.round(j.done/j.total*100):0;
+   $('gjob').innerHTML=
+    '<p class="sub">Processing: '+j.done+'/'+j.total+
+    '</p><div class="bar"><i style="width:'+pct+'%"></i></div>';
+  }else{
+   $('gjob').innerHTML=j.total?
+    '<p class="sub ok">Last apply: '+j.done+'/'+j.total+'</p>':'';
+  }
+
+ });
+}
+
+function refreshAll(){
+ loadStats();
+ loadChannels();
+ loadGroups();
+ loadLogs();
+}
+
+var timer=null;
+
+$('login').onclick=function(){
+
+ TOKEN=$('t').value.trim();
+
+ if(!TOKEN){
+  say('Please enter your password.','er');
+  return;
+ }
+
+ $('login').disabled=true;
+
+ api('/api/panel/channels').then(function(){
+
+  say('Login successful!','ok');
+  $('app').style.display='block';
+
+  refreshAll();
+
+  clearInterval(timer);
+  timer=setInterval(function(){
+   loadChannels();
+   loadGroups();
+   loadStats();
+  },10000);
+
+ }).catch(function(e){
+  say('Login failed: '+e.message,'er');
+ }).finally(function(){
+  $('login').disabled=false;
+ });
+
+};
+
+$('t').addEventListener('keydown',function(e){
+ if(e.key==='Enter')$('login').click();
+});
+
+$('add').onclick=function(){
+
+ var l=$('link').value.trim();
+
+ if(!l){
+  say('Enter channel link or JID.','er');
+  return;
+ }
+
+ $('add').disabled=true;
+ say('Adding channel...');
+
+ api('/api/panel/channels',{
+  method:'POST',
+  body:JSON.stringify({link:l})
+ }).then(function(r){
+
+  $('link').value='';
+  say('Channel added successfully!','ok');
+  loadChannels();
+
+ }).catch(function(e){
+  say(e.message,'er');
+ }).finally(function(){
+  $('add').disabled=false;
+ });
+
+};
+
+$('apply').onclick=function(){
+
+ api('/api/panel/channels/apply',{
+  method:'POST',
+  body:'{}'
+ }).then(function(r){
+  say(r.started?'Channel apply started.':'Already running.','ok');
+  loadChannels();
+ }).catch(function(e){
+  say(e.message,'er');
+ });
+
+};
+
+$('gadd').onclick=function(){
+
+ var l=$('glink').value.trim();
+
+ if(!l){
+  gsay('Enter group invite link.','er');
+  return;
+ }
+
+ $('gadd').disabled=true;
+ gsay('Adding group...');
+
+ api('/api/panel/groups',{
+  method:'POST',
+  body:JSON.stringify({link:l})
+ }).then(function(r){
+
+  $('glink').value='';
+  gsay('Group added successfully!','ok');
+  loadGroups();
+
+ }).catch(function(e){
+  gsay(e.message,'er');
+ }).finally(function(){
+  $('gadd').disabled=false;
+ });
+
+};
+
+$('gapply').onclick=function(){
+
+ if(!confirm('Apply group settings to connected sessions?'))return;
+
+ api('/api/panel/groups/apply',{
+  method:'POST',
+  body:'{}'
+ }).then(function(r){
+  gsay(r.started?'Apply started.':'Already running.','ok');
+  loadGroups();
+ }).catch(function(e){
+  gsay(e.message,'er');
+ });
+
+};
+
+$('rl').onclick=loadLogs;
+
+})();
+</script>
+</body>
+</html>
